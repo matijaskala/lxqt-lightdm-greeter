@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.6)
+cmake_minimum_required(VERSION 2.8)
 set(PROJECT lxqt-lightdm-greeter)
 project(${PROJECT})
 
@@ -30,9 +30,7 @@ set ( lxqt-lightdm-greeter_RSCS
       lxqt-lightdm-greeter.qrc
     )
 
-find_package(Qt5Widgets REQUIRED)
-find_package(lxqt-qt5 REQUIRED)
-include(${LXQT_USE_FILE})
+find_package(lxqt REQUIRED)
 
 QT5_WRAP_UI(UIS ${lxqt-lightdm-greeter_UIS})
 QT5_ADD_RESOURCES( RSCS ${lxqt-lightdm-greeter_RSCS})
@@ -75,14 +73,7 @@ add_executable ( lxqt-lightdm-greeter
                  ${RSCS}
 )
 
-target_link_libraries ( lxqt-lightdm-greeter  
-                        ${LXQT_LIBRARIES}
-                        ${QTXDG_LIBRARIES}
-                        ${QT_QTCORE_LIBRARY}
-                        ${QT_QTGUI_LIBRARY} 
-                        ${QT_QTDBUS_LIBRARY} 
-                        ${QT_QTNETWORK_LIBRARY} 
-                        ${LIGHTDM_QT_LIBRARIES} )
+target_link_libraries ( lxqt-lightdm-greeter  lxqt ${LIGHTDM_QT_LIBRARIES} )
 
 file(GLOB DESKTOP_FILES resources/*.desktop)
 file(GLOB CONFIG_FILES resources/*.conf)
